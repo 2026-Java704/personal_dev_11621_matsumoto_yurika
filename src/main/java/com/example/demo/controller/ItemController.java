@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -61,9 +62,46 @@ public class ItemController {
 		itemRepository.save(item);
 		return "redirect:/items";
 	}
+	
+	//編集画面の表示
+	@GetMapping("/items/{id}/edit")
+	public String edit(@PathVariable Integer id, Model model) {
+		Item item = itemRepository.findById(id).get();
+		model.addAttribute("item", item);
+		model.addAttribute("genreList", genreRepository.findAll());
+		return "editItem";
+	}
+	
+	
+	//編集機能の追加
+	@PostMapping("/items/{id}/edit")
+	public String update(
+			@PathVariable Integer id,
+			@RequestParam LocalDate addDate,
+			@RequestParam String itemName,
+			@RequestParam Integer genreId,
+			@RequestParam Integer price,
+			@RequestParam String comment,
+			Model model) {
 		
+		Item item = itemRepository.findById(id).get();
+		item.setAddDate(addDate);
+		item.setItemName(itemName);
+		item.setGenre(genreRepository.findById(genreId).get());
+		item.setPrice(price);
+		item.setComment(comment);
+		
+		itemRepository.save(item);
+		return "redirect:/items";
+		
+	}
 	
-	
-	
+	//削除処理
+	@PostMapping("/items/{id}/delete")
+	public String delete(@PathVariable Integer id) {
+		
+		itemRepository.deleteById(id);
+		return "redirect:/items";
+	}
 
 }

@@ -17,6 +17,8 @@
 			<th>ジャンル</th>
 			<th>金額</th>
 			<th>コメント</th>
+			<th>編集</th>
+			<th>削除</th>
 		</tr>
 		<tr th:each="item:${items}">
 			<td th:text="${item.addDate}"></td>
@@ -24,6 +26,16 @@
 			<td th:text="${item.genre.genreName}"></td>
 			<td th:text="${item.price}"></td>
 			<td th:text="${item.comment}"></td>
+			<td>
+				<form th:action="@{/items/{itemId}/edit(itemId=${item.id})}" method="get">
+					<button>編集</button>
+				</form>
+			</td>
+			<td>
+				<form th:action="@{/items/{itemId}/delete(itemId=${item.id})}" method="post">
+					<button>削除</button>
+				</form>
+			</td>
 		</tr>
 	</table>
 	

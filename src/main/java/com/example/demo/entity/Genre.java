@@ -33,5 +33,8 @@ public class Genre {
 		
 	}
 	
+	public Integer getId() {
+		return id;
+	}
 
 }
