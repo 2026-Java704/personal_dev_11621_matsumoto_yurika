@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>項目追加</title>
+	<script>
+		function goBack() {
+			history.back();
+		}
+	</script>
+</head>
+
+<body>
+
+	<h1>追加</h1>
+	<form action="/items/add" method="post">
+		<table border="1">
+			<tr>
+				<th>日付</th>
+				<td><input type="date" name="addDate"></td>
+			</tr>
+
+			<tr>
+				<th>名前</th>
+				<td><input type="text" name="itemName"></td>
+			</tr>
+
+			<tr>
+				<th>ジャンル</th>
+				<td>
+					<select name="genreId">
+						<option value="" disabled selected>選択してください</option>
+						<option value="1">給与</option>
+						<option value="2">固定費</option>
+						<option value="3">変動費</option>
+						<option value="4">その他の収入</option>
+						<option value="5">その他の支出</option>
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<th>金額</th>
+				<td><input type="text" name="price"></td>
+			</tr>
+
+			<tr>
+				<th>コメント</th>
+				<td><input type="text" name="comment"></td>
+			</tr>
+
+		</table>
+		<button>追加</button>
+	</form>
+
+	
+	<button type="button" onclick="goBack()">一覧に戻る</button>
+</body>
+
+</html>

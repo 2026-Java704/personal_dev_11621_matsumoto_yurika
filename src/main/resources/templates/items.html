@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>家計簿</title>
+	<meta charset="UTF-8">
+	<title>家計簿</title>
 </head>
+
 <body>
-	
+
 	<h1>家計簿</h1>
-	
+
 	<table border="1">
 		<tr>
 			<th>日付</th>
@@ -22,9 +24,11 @@
 			<td th:text="${item.genre.genreName}"></td>
 			<td th:text="${item.price}"></td>
 			<td th:text="${item.comment}"></td>
-			
 		</tr>
 	</table>
+	
+	<a href="/items/add">追加</a>
 
 </body>
+
 </html>
