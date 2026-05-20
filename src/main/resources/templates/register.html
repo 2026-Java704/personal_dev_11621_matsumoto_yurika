@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		function goBack() {
+			history.back();
+		}
+	</script>
+</head>
+
+<body>
+
+	<h1>新規登録</h1>
+	
+	<ul th:if="${errorList}" class="error">
+		<li th:each="error:${errorList}" th:text="${error}"></li>
+	</ul>
+
+	<form action="/register" method="post">
+		<table border="1">
+			<tr>
+				<th>メールアドレス</th>
+				<td><input type="text" name="email"></td>
+			</tr>
+
+			<tr>
+				<th>パスワード</th>
+				<td><input type="text" name="password"></td>
+			</tr>
+		</table>
+		<button>登録</button>
+	</form>
+
+
+	<button type="button" onclick="goBack()">ログイン画面に戻る</button>
+</body>
+
+</html>
