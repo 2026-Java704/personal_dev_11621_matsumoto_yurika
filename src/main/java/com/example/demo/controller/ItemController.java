@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.entity.Genre;
 import com.example.demo.entity.Item;
 import com.example.demo.repository.GenreRepository;
 import com.example.demo.repository.ItemRepository;
@@ -39,7 +40,9 @@ public class ItemController {
 	
 	//項目追加画面の表示
 	@GetMapping("/items/add")
-	public String add() {
+	public String add(Model model) {
+		List<Genre> genreList = genreRepository.findAll();
+		model.addAttribute("genreList", genreList);
 		return "addItem";
 	}
 	

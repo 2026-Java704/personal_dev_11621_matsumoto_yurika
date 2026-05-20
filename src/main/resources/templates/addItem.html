@@ -31,11 +31,9 @@
 				<td>
 					<select name="genreId">
 						<option value="" disabled selected>選択してください</option>
-						<option value="1">給与</option>
-						<option value="2">固定費</option>
-						<option value="3">変動費</option>
-						<option value="4">その他の収入</option>
-						<option value="5">その他の支出</option>
+						<option th:each="genre:${genreList}" th:value="${genre.id}">
+							[[${genre.genreName}]]
+						</option>
 					</select>
 				</td>
 			</tr>
@@ -54,7 +52,7 @@
 		<button>追加</button>
 	</form>
 
-	
+
 	<button type="button" onclick="goBack()">一覧に戻る</button>
 </body>
 

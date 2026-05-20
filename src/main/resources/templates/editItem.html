@@ -14,7 +14,7 @@
 <body>
 
 	<h1>追加</h1>
-	<form action="@{/items/{itemId}/edit(itemId=${item.id})}" method="post">
+	<form th:action="@{/items/{itemId}/edit(itemId=${item.id})}" method="post">
 		<table border="1">
 			<tr>
 				<th>日付</th>
