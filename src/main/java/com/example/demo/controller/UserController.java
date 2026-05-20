@@ -48,8 +48,10 @@ public class UserController {
 			model.addAttribute("message", "メールアドレスとパスワードが一致しませんでした");
 			return "login";
 		}
+		
 		User user = userList.get(0);
 		account.setUserName(user.getUserName());
+		account.setId(user.getId());
 		
 		return "redirect:/items";
 	}
@@ -63,11 +65,15 @@ public class UserController {
 	//新規登録機能
 	@PostMapping("/register")
 	public String add(
+			@RequestParam String userName,
 			@RequestParam String email,
 			@RequestParam String password,
 			Model model) {
 			
 			List<String> errorList = new ArrayList<>();
+			if(userName.length() == 0) {
+				errorList.add("ユーザー名は必須です");
+			}
 			if(email.length() == 0) {
 				errorList.add("メールアドレスは必須です");
 			}
@@ -81,12 +87,13 @@ public class UserController {
 			
 			if(errorList.size() > 0) {
 				model.addAttribute("errorList", errorList);
+				model.addAttribute("userName", userName);
 				model.addAttribute("email", email);
 				model.addAttribute("password", password);
 				return "register";
 			}
 			
-			User user = new User(email, password);
+			User user = new User(userName, email, password);
 			userRepository.save(user);
 			return "redirect/login";
 		}

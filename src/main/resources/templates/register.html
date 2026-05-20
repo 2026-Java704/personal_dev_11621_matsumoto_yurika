@@ -14,13 +14,17 @@
 <body>
 
 	<h1>新規登録</h1>
-	
+
 	<ul th:if="${errorList}" class="error">
 		<li th:each="error:${errorList}" th:text="${error}"></li>
 	</ul>
 
 	<form action="/register" method="post">
 		<table border="1">
+			<tr>
+				<th>ユーザー名</th>
+				<td><input type="text" name="userName"></td>
+			</tr>
 			<tr>
 				<th>メールアドレス</th>
 				<td><input type="text" name="email"></td>
@@ -34,8 +38,10 @@
 		<button>登録</button>
 	</form>
 
+	<form action="/login" method="get">
+		<button>ログイン画面に戻る</button>
+	</form>
 
-	<button type="button" onclick="goBack()">ログイン画面に戻る</button>
 </body>
 
 </html>

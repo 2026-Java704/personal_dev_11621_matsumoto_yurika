@@ -4,11 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>家計簿</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
 
-	<h1>家計簿</h1>
+	<header th:replace="~{header}"></header>
+	<hr>
 
 	<table border="1">
 		<tr>
@@ -38,8 +40,16 @@
 			</td>
 		</tr>
 	</table>
-	
-	<a href="/items/add">追加</a>
+
+	[[${incomeAndOutcome}]]
+
+	<form action="/items/add" method="get">
+		<button>追加</button>
+	</form>
+
+	<hr>
+	<footer th:replace="~{footer}"></footer>
+
 
 </body>
 

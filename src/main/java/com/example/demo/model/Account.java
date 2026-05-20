@@ -11,14 +11,15 @@ public class Account {
 
 
 	private String userName;
+	private Integer id;
 
-
-	public Account() {
+	public Integer getId() {
+		return id;
 	}
 
 
-	public Account(String userName) {
-		this.userName = userName;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 

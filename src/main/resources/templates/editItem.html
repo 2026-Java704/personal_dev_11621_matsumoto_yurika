@@ -4,11 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script>
-		function goBack() {
-			history.back();
-		}
-	</script>
+
 </head>
 
 <body>
@@ -53,8 +49,9 @@
 		<button>更新</button>
 	</form>
 
-
-	<button type="button" onclick="goBack()">一覧に戻る</button>
+	<form action="/items" method="get">
+		<button>一覧に戻る</button>
+	</form>
 </body>
 
 </html>

@@ -35,6 +35,17 @@ public class ItemController {
 		List<Item> itemList = itemRepository.findAll();
 		model.addAttribute("items", itemList);
 		
+		//収支計算
+		int incomeAndOutcome = 0;
+		for (Item item : itemList) {
+			if(item.getGenre().getIsIncome() == true) {
+				incomeAndOutcome += item.getPrice();
+			}else {
+				incomeAndOutcome -= item.getPrice();
+			}
+		}
+		model.addAttribute("incomeAndOutcome", incomeAndOutcome);
+		
 		return "items";
 	}
 	
@@ -106,5 +117,7 @@ public class ItemController {
 		itemRepository.deleteById(id);
 		return "redirect:/items";
 	}
+	
+	
 
 }
