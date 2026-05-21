@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Genre;
 import com.example.demo.entity.Item;
+import com.example.demo.model.Account;
 import com.example.demo.repository.GenreRepository;
 import com.example.demo.repository.ItemRepository;
 import com.example.demo.repository.UserRepository;
@@ -19,36 +20,59 @@ import com.example.demo.repository.UserRepository;
 @Controller
 public class ItemController {
 
+    private final Account account;
+
 	private final ItemRepository itemRepository;
 	private final GenreRepository genreRepository;
 	private final UserRepository userRepository;
-	
-	public ItemController(ItemRepository itemRepository, GenreRepository genreRepository, UserRepository userRepository) {
+
+	public ItemController(ItemRepository itemRepository, GenreRepository genreRepository,
+			UserRepository userRepository, Account account) {
 		this.itemRepository = itemRepository;
 		this.genreRepository = genreRepository;
 		this.userRepository = userRepository;
+		this.account = account;
 	}
-	
+
 	//商品一覧
 	@GetMapping("/items")
-	public String index(Model model) {
-		List<Item> itemList = itemRepository.findAll();
+	public String index(
+			@RequestParam(defaultValue = "") Integer genreId,
+			Model model) {
+		List<Genre> genreList = genreRepository.findAll();
+		model.addAttribute("genres", genreList);
+
+		//カテゴリー表示
+		List<Item> itemList = null;
+		if (genreId == null) {
+			itemList = itemRepository.findByUserId(account.getId());
+		} else {
+			itemList = itemRepository.findByUserIdAndGenreId(account.getId(),genreId);
+		}
 		model.addAttribute("items", itemList);
 		
+
 		//収支計算
 		int incomeAndOutcome = 0;
+		int income = 0;
+		int outcome = 0; 
+		
 		for (Item item : itemList) {
-			if(item.getGenre().getIsIncome() == true) {
+			if (item.getGenre().getIsIncome() == true) {
 				incomeAndOutcome += item.getPrice();
-			}else {
+				income += item.getPrice();
+			} else {
 				incomeAndOutcome -= item.getPrice();
+				outcome -= item.getPrice();
 			}
 		}
 		model.addAttribute("incomeAndOutcome", incomeAndOutcome);
-		
+		model.addAttribute("income", income);
+		model.addAttribute("outcome", outcome);
+
 		return "items";
 	}
-	
+
 	//項目追加画面の表示
 	@GetMapping("/items/add")
 	public String add(Model model) {
@@ -56,27 +80,27 @@ public class ItemController {
 		model.addAttribute("genreList", genreList);
 		return "addItem";
 	}
-	
+
 	//項目追加機能
 	@PostMapping("/items/add")
 	public String store(
-		@RequestParam LocalDate addDate,
-		@RequestParam String itemName,
-		@RequestParam Integer genreId,
-		@RequestParam Integer price,
-		@RequestParam String comment) {
-		
+			@RequestParam LocalDate addDate,
+			@RequestParam String itemName,
+			@RequestParam Integer genreId,
+			@RequestParam Integer price,
+			@RequestParam String comment) {
+
 		Item item = new Item(
 				userRepository.findById(1).get(),
-				addDate, 
-				itemName, 
+				addDate,
+				itemName,
 				genreRepository.findById(genreId).get(),
-				price, 
+				price,
 				comment);
 		itemRepository.save(item);
 		return "redirect:/items";
 	}
-	
+
 	//編集画面の表示
 	@GetMapping("/items/{id}/edit")
 	public String edit(@PathVariable Integer id, Model model) {
@@ -85,8 +109,7 @@ public class ItemController {
 		model.addAttribute("genreList", genreRepository.findAll());
 		return "editItem";
 	}
-	
-	
+
 	//編集機能の追加
 	@PostMapping("/items/{id}/edit")
 	public String update(
@@ -97,27 +120,25 @@ public class ItemController {
 			@RequestParam Integer price,
 			@RequestParam String comment,
 			Model model) {
-		
+
 		Item item = itemRepository.findById(id).get();
 		item.setAddDate(addDate);
 		item.setItemName(itemName);
 		item.setGenre(genreRepository.findById(genreId).get());
 		item.setPrice(price);
 		item.setComment(comment);
-		
+
 		itemRepository.save(item);
 		return "redirect:/items";
-		
+
 	}
-	
+
 	//削除処理
 	@PostMapping("/items/{id}/delete")
 	public String delete(@PathVariable Integer id) {
-		
+
 		itemRepository.deleteById(id);
 		return "redirect:/items";
 	}
-	
-	
 
 }
