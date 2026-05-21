@@ -2,29 +2,23 @@
 
 /* 全体 */
 body {
-	background-color: #EFF0F7; /* 背景色  */
+	background-color: rgb(204, 254, 154); /* 背景色  */
 	text-align: center; /* 中央寄せ */
     min-width: 900px; /* 最小幅 */
 }
 
 /* ヘッダー、ナビゲーションメニュー、フッター */
 header, nav, footer {
-	background-color: #45496a; /* 背景色 */
+	background-color: rgb(1, 97, 26); /* 背景色 */
 	color: #ffffff; /* 文字色 */
 	padding-top: 5px; /* 内側余白(上) */
 	padding-bottom: 5px; /* 内側余白(下) */
 }
 
-/* ヘッダー、ナビゲーション内リンク */
-header a, nav a {
+/* ヘッダー */
+header a {
 	text-decoration: none;
 	color: #ffffff;
-}
-
-/* ヘッダー内見出し */
-header h1 {
-	font-size: 20pt;
-	margin: 10px auto;
 }
 
 /* ナビゲーション内リンク(マウスオーバー時) */
@@ -34,7 +28,7 @@ nav a:hover {
 
 /* 仕切り線 */
 hr {
-	border-top: 2px dashed #7d8bae;
+	border-top: 2px dashed rgb(251, 138, 0);
 }
 
 /* メイン */
@@ -44,29 +38,15 @@ main {
 	padding: 20px;
 }
 
-/* 表線 */
-table, th, td {
-	border-collapse: collapse;
-	border: 1px solid #7d8bae;
-}
-
-/* 表 */
 table {
     margin: 5px auto;
-    min-width: 800px;
-}
-
-/* 表見出しセル */
-table th {
-	background: #7d8bae;
-	color: #ffffff;
 }
 
 /* 送信ボタン */
 button {
 	margin: 2px;
 	padding: 5px 20px;
-	background-color: #e5857b;
+	background-color: rgb(251, 138, 0);
 	color: #ffffff;
 	border: none;
 	width:150px;
@@ -75,9 +55,8 @@ button {
 
 /* 送信ボタン(マウスオーバー時) */
 button:hover {
-	background-color: #f1b2b2;
+	background-color: rgb(255, 194, 121);
 }
-
 
 /* フッター */
 footer {
@@ -85,3 +64,15 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
+.square {
+   width: 500px;
+   height: 300px;
+   margin: auto;
+   margin-top: 80px;
+   border-radius: 40px 40px 40px 40px;
+   border: 3px solid rgb(1, 97, 26);
+   background: rgb(217, 254, 199);
+  
+}
+
