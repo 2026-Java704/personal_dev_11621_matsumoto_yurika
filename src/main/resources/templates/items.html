@@ -8,59 +8,74 @@
 </head>
 
 <body>
+	<header th:replace="~{header}"> </header>
 
-	<header th:replace="~{header}"></header>
-	<hr>
+	<div class="grid-area">
 
-	<nav>
-	    <a href="/items">今月の収支</a>
-	    <a th:each="g : ${genres}" th:href="@{/items(genreId=${g.id})}">
-	        <span th:text="${g.genreName}" style="padding-right: 5px; padding-left: 5px;"></span>
-	    </a>
-	</nav>
+		<div class="top-area">
+			<span th:text="${@account.userName}+' の庭'"></span>
 
+			<form action="/login" method="get">
+				<button>ログアウト</button>
+			</form>
 
-	<table border="1">
-		<tr>
-			<th>日付</th>
-			<th>名前</th>
-			<th>ジャンル</th>
-			<th>金額</th>
-			<th>コメント</th>
-			<th>編集</th>
-			<th>削除</th>
-		</tr>
-		<tr th:each="item:${items}">
-			<td th:text="${item.addDate}"></td>
-			<td th:text="${item.itemName}"></td>
-			<td th:text="${item.genre.genreName}"></td>
-			<td th:text="${item.price}"></td>
-			<td th:text="${item.comment}"></td>
-			<td>
-				<form th:action="@{/items/{itemId}/edit(itemId=${item.id})}" method="get">
-					<button>編集</button>
+		</div>
+
+		<div class="bottom-area">
+			<nav>
+				<a href="/items">今月の収支</a>
+				<a th:each="g : ${genres}" th:href="@{/items(genreId=${g.id})}">
+					<span th:text="${g.genreName}" style="padding-right: 5px; padding-left: 5px;"></span>
+				</a>
+
+				<form action="/items/add" method="get">
+					<button style="padding-left: 30px;">追加</button>
 				</form>
-			</td>
-			<td>
-				<form th:action="@{/items/{itemId}/delete(itemId=${item.id})}" method="post">
-					<button>削除</button>
-				</form>
-			</td>
-		</tr>
-	</table>
+			</nav>
 
-	[[${income}]]
-	[[${outcome}]]
-	<br>[[${incomeAndOutcome}]]
+			<table border="1">
+				<tr>
+					<th>日付</th>
+					<th>名前</th>
+					<th>ジャンル</th>
+					<th>金額</th>
+					<th>コメント</th>
+					<th>編集</th>
+					<th>削除</th>
+				</tr>
+				<tr th:each="item:${items}">
+					<td th:text="${item.addDate}"></td>
+					<td th:text="${item.itemName}"></td>
+					<td th:text="${item.genre.genreName}"></td>
+					<td th:text="${item.price}"></td>
+					<td th:text="${item.comment}"></td>
+					<td>
+						<form th:action="@{/items/{itemId}/edit(itemId=${item.id})}" method="get">
+							<button>編集</button>
+						</form>
+					</td>
+					<td>
+						<form th:action="@{/items/{itemId}/delete(itemId=${item.id})}" method="post">
+							<button>削除</button>
+						</form>
+					</td>
+				</tr>
+			</table>
+			
+			<div class="price-area">
+				<p style="color:blue">[[${income}]]</p>
+				<p style="color:rgb(255, 0, 0)">[[${outcome}]]</p>
+				
+				<strong>[[${incomeAndOutcome}]]</strong>
+			</div>
 
-	<form action="/items/add" method="get">
-		<button>追加</button>
-	</form>
 
-	<hr>
+		</div>
+
+	</div>
+
 	<footer th:replace="~{footer}"></footer>
-
-
 </body>
+
 
 </html>

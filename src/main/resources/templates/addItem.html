@@ -3,57 +3,86 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>項目追加</title>
+	<title>家計簿</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<script>
 		function goBack() {
-			history.back();
-		}
+			history.back();}
 	</script>
+
 </head>
 
 <body>
+	<header th:replace="~{header}"> </header>
 
-	<h1>追加</h1>
-	<form action="/items/add" method="post">
-		<table border="1">
-			<tr>
-				<th>日付</th>
-				<td><input type="date" name="addDate"></td>
-			</tr>
+	<div class="grid-area">
 
-			<tr>
-				<th>名前</th>
-				<td><input type="text" name="itemName"></td>
-			</tr>
+		<div class="top-area">
+			<span th:text="${@account.userName}+' の庭'"></span>
+			Top
 
-			<tr>
-				<th>ジャンル</th>
-				<td>
-					<select name="genreId">
-						<option value="" disabled selected>選択してください</option>
-						<option th:each="genre:${genreList}" th:value="${genre.id}">
-							[[${genre.genreName}]]
-						</option>
-					</select>
-				</td>
-			</tr>
+			<form action="/login" method="get">
+				<button>ログアウト</button>
+			</form>
 
-			<tr>
-				<th>金額</th>
-				<td><input type="text" name="price"></td>
-			</tr>
+		</div>
 
-			<tr>
-				<th>コメント</th>
-				<td><input type="text" name="comment"></td>
-			</tr>
+		<div class="bottom-area">
+			<nav>
+				<h1>追加</h1>
+			</nav>
 
-		</table>
-		<button>追加</button>
-	</form>
+			<form action="/items/add" method="post">
+				<table border="1">
+					<tr>
+						<th>日付</th>
+						<td><input type="date" name="addDate"></td>
+					</tr>
+
+					<tr>
+						<th>名前</th>
+						<td><input type="text" name="itemName"></td>
+					</tr>
+
+					<tr>
+						<th>ジャンル</th>
+						<td>
+							<select name="genreId">
+								<option value="" disabled selected>選択してください</option>
+								<option th:each="genre:${genreList}" th:value="${genre.id}">
+									[[${genre.genreName}]]
+								</option>
+							</select>
+						</td>
+					</tr>
+
+					<tr>
+						<th>金額</th>
+						<td><input type="text" name="price"></td>
+					</tr>
+
+					<tr>
+						<th>コメント</th>
+						<td><input type="text" name="comment"></td>
+					</tr>
+
+				</table>
+				<button>追加</button>
+			</form>
 
 
-	<button type="button" onclick="goBack()">一覧に戻る</button>
+
+			<div class="price-area">
+				<button type="button" onclick="goBack()">一覧に戻る</button>
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<footer th:replace="~{footer}"></footer>
 </body>
+
 
 </html>

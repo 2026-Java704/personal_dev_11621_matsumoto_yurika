@@ -3,55 +3,88 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>家計簿</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<script>
+		function goBack() {
+			history.back();
+		}
+	</script>
 
 </head>
 
 <body>
+	<header th:replace="~{header}"> </header>
 
-	<h1>追加</h1>
-	<form th:action="@{/items/{itemId}/edit(itemId=${item.id})}" method="post">
-		<table border="1">
-			<tr>
-				<th>日付</th>
-				<td><input type="date" name="addDate" th:value="${item.addDate}"></td>
-			</tr>
+	<div class="grid-area">
 
-			<tr>
-				<th>名前</th>
-				<td><input type="text" name="itemName" th:value="${item.itemName}"></td>
-			</tr>
+		<div class="top-area">
+			<span th:text="${@account.userName}+' の庭'"></span>
+			Top
 
-			<tr>
-				<th>ジャンル</th>
-				<td>
-					<select name="genreId">
-						<option th:each="genre:${genreList}" th:value="${genre.id}"
-							th:selected="${item.genre.id == genre.id}">
-							[[${genre.genreName}]]
-						</option>
+			<form action="/login" method="get">
+				<button>ログアウト</button>
+			</form>
 
-					</select>
-				</td>
-			</tr>
+		</div>
 
-			<tr>
-				<th>金額</th>
-				<td><input type="text" name="price" th:value="${item.price}"></td>
-			</tr>
+		<div class="bottom-area">
+			<nav>
+				<h1>編集</h1>
+			</nav>
 
-			<tr>
-				<th>コメント</th>
-				<td><input type="text" name="comment" th:value="${item.comment}"></td>
-			</tr>
+			<form th:action="@{/items/{itemId}/edit(itemId=${item.id})}" method="post">
+				<table border="1">
+					<tr>
+						<th>日付</th>
+						<td><input type="date" name="addDate" th:value="${item.addDate}"></td>
+					</tr>
 
-		</table>
-		<button>更新</button>
-	</form>
+					<tr>
+						<th>名前</th>
+						<td><input type="text" name="itemName" th:value="${item.itemName}"></td>
+					</tr>
 
-	<form action="/items" method="get">
-		<button>一覧に戻る</button>
-	</form>
+					<tr>
+						<th>ジャンル</th>
+						<td>
+							<select name="genreId">
+								<option th:each="genre:${genreList}" th:value="${genre.id}"
+									th:selected="${item.genre.id == genre.id}">
+									[[${genre.genreName}]]
+								</option>
+
+							</select>
+						</td>
+					</tr>
+
+					<tr>
+						<th>金額</th>
+						<td><input type="text" name="price" th:value="${item.price}"></td>
+					</tr>
+
+					<tr>
+						<th>コメント</th>
+						<td><input type="text" name="comment" th:value="${item.comment}"></td>
+					</tr>
+
+				</table>
+				<button>更新</button>
+			</form>
+
+
+
+			<div class="price-area">
+				<button type="button" onclick="goBack()">一覧に戻る</button>
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<footer th:replace="~{footer}"></footer>
 </body>
+
 
 </html>

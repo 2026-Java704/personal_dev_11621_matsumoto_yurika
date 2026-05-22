@@ -1,87 +1,171 @@
-@charset "UTF-8";
+/* 画面構成 */
 
-/* 全体 */
-body {
-	background-color: #EFF0F7; /* 背景色  */
-	text-align: center; /* 中央寄せ */
-    min-width: 900px; /* 最小幅 */
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	overflow: hidden; /* 全体スクロールを強制禁止 */
 }
 
-/* ヘッダー、ナビゲーションメニュー、フッター */
-header, nav, footer {
-	background-color: #45496a; /* 背景色 */
-	color: #ffffff; /* 文字色 */
+body {
+	background-color: rgb(240,252,169); /* 背景色 */
+}
+
+.grid-area {
+	display: grid;
+	/* ヘッダー（80px）とフッター（約34px）の合計「114px」を引き算 */
+	height: calc(100vh - 114px); 
+	grid-template-rows: 100%;
+	grid-template-columns: 40% 60%; 
+}
+
+.top-area {
+	grid-row: 1;
+	grid-column: 1;
+	text-align: center;
+	background-color: rgb(251,249,206);
+	border-left:2px rgb(73,97,28);
+}
+
+.bottom-area {
+	grid-row: 1;
+	grid-column: 2;
+	overflow-y: scroll;
+}
+
+/* ヘッダー、フッターの設定 */
+header {
+	position: sticky; /* ここに注目! */
+	top: 0;
+	height: 80px;
+	
+	background: 
+	linear-gradient(to right, rgb(219,252,46) 60%, transparent 40%) no-repeat,
+	rgb(73,97,28);
+	background-size: 10px 2px, auto;
+	background-repeat: repeat-x, no-repeat;
+	
+	background-position: 0 76px, 0 0; 
+
 	padding-top: 5px; /* 内側余白(上) */
 	padding-bottom: 5px; /* 内側余白(下) */
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-/* ヘッダー、ナビゲーション内リンク */
-header a, nav a {
+
+header a {
 	text-decoration: none;
 	color: #ffffff;
 }
 
-/* ヘッダー内見出し */
-header h1 {
-	font-size: 20pt;
-	margin: 10px auto;
+footer {
+	width: 100%;
+	height: 24px; /* フッターの高さを24pxに固定（上下padding 5px×2 と合わせて計34px） */
+	background-color: rgb(73,97,28);
+	color: #ffffff;
+	padding-top: 5px; /* 内側余白(上) */
+	padding-bottom: 5px; /* 内側余白(下) */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-/* ナビゲーション内リンク(マウスオーバー時) */
+
+/* ナビゲーション */
+
+nav{
+	position: sticky;/* ここに注目! */
+	top: 0;
+	width: 100%;
+	
+	display: flex;
+	
+	background-color: rgb(191,210,103);
+	color: #ffffff;
+	
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+}
+
+nav a{
+	text-decoration: none;
+	color: rgb(0, 0, 0);
+}
+
 nav a:hover {
-	background-color: rgb(128, 128, 255);
+	background-color: rgb(219,252,46);
+	color: rgb(73,97,28);
 }
 
-/* 仕切り線 */
-hr {
-	border-top: 2px dashed #7d8bae;
+nav button {
+	margin-left: 2px;
+	padding: 5px 20px;
+	background-color: rgb(73,97,28);
+	color: #ffffff;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	border: none;
+	width: 80px;
+	cursor: pointer;
+	
 }
 
-/* メイン */
-main {
-	background-color: #FFFFFF;
-	min-height: 50px;
-	padding: 20px;
+.price-area{
+	position: sticky;/* ここに注目! */
+	bottom: 0;
+	width: 100%;
+	background-color: rgb(191,210,103);
 }
 
-/* 表線 */
-table, th, td {
-	border-collapse: collapse;
-	border: 1px solid #7d8bae;
+div p{
+	display: flex;
+	justify-content: space-between;
 }
 
 /* 表 */
-table {
-    margin: 5px auto;
-    min-width: 800px;
+
+
+table,th,td {
+	border-collapse: collapse;
+	border: 1px solid rgb(0, 51, 13);
 }
 
-/* 表見出しセル */
+table {
+	margin: 5px auto;
+	width: 95%;
+}
+
 table th {
-	background: #7d8bae;
+	background: rgb(73,97,28);
 	color: #ffffff;
 }
 
-/* 送信ボタン */
-button {
+table button {
 	margin: 2px;
 	padding: 5px 20px;
-	background-color: #e5857b;
-	color: #ffffff;
-	border: none;
-	width:150px;
+	background-color: rgb(191,210,103);
+	color: rgb(73,97,28);
+	border: 2px solid rgb(73,97,28);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	font-weight: bold;
+	width: 80px;
 	cursor: pointer;
 }
 
-/* 送信ボタン(マウスオーバー時) */
-button:hover {
-	background-color: #f1b2b2;
+table button:hover {
+	background-color: rgb(219,252,46);
 }
 
 
-/* フッター */
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+
+
+
+
+
+
+
+
