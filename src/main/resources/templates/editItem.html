@@ -16,12 +16,12 @@
 		<div class="top-area">
 			<span th:text="${@account.userName}+' の庭'"></span>
 			<br>
-			<img th:src="@{/images/harinezumi-star.png}" alt="ハリネズミ" height="100px">
 
-			<form action="/login" method="get">
-				<button>ログアウト</button>
-			</form>
+			<img th:src="@{/images/udekumi-harinezumi.png}" alt="ハリネズミ（考える）"
+				height="100px">
 		</div>
+
+
 
 		<div class="bottom-area">
 			<nav>
@@ -69,7 +69,11 @@
 					</tr>
 
 				</table>
-				<button>更新</button>
+
+				<div class="form-submit">
+					<button type="submit">編集</button>
+				</div>
+
 			</form>
 
 

@@ -14,13 +14,23 @@
 
 		<div class="top-area">
 			<span th:text="${@account.userName}+' の庭'"></span>
-			
+
 			<br>
-			<img th:src="@{/images/harinezumi-star.png}" alt="ハリネズミ" height="100px">
+
+			<img th:if="${incomeAndOutcome &lt; 0}" th:src="@{/images/harinezumi-gyafn.png}" alt="ハリネズミ（赤字）"
+				height="100px">
+
+			<img th:if="${incomeAndOutcome &gt;= 0 and incomeAndOutcome &lt; 10000}"
+				th:src="@{/images/harinezumi-ouen.png}" alt="ハリネズミ（通常）" height="100px">
+
+			<img th:if="${incomeAndOutcome &gt;= 10000}" th:src="@{/images/harinezumi-star.png}" alt="ハリネズミ（目標達成）"
+				height="100px">
 
 		</div>
 
 		<div class="bottom-area">
+
+
 			<nav>
 				<a href="/items">今月の収支</a>
 				<a th:each="g : ${genres}" th:href="@{/items(genreId=${g.id})}">
@@ -28,7 +38,7 @@
 				</a>
 
 				<form action="/items/add" method="get">
-					<button style="padding-left: 30px;">追加</button>
+					<button style="padding-left: 30px;" align="center">追加</button>
 				</form>
 			</nav>
 
@@ -60,11 +70,14 @@
 					</td>
 				</tr>
 			</table>
-			
+
+
+
 			<div class="price-area">
-				<p style="color:blue">[[${income}]]</p>
-				<p style="color:rgb(255, 0, 0)">[[${outcome}]]</p>
-				
+				<table bordercolor="rgb(73,97,28)">
+					<td style="color:blue">[[${income}]]</td>
+					<td style="color:red">[[${outcome}]]</td>
+				</table>
 				<strong>[[${incomeAndOutcome}]]</strong>
 			</div>
 

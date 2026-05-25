@@ -71,11 +71,9 @@ public class ItemController {
 		model.addAttribute("income", income);
 		model.addAttribute("outcome", outcome);
 		
-		//画像表示
-		
-
 		return "items";
 	}
+
 
 	//項目追加画面の表示
 	@GetMapping("/items/add")
