@@ -18,7 +18,7 @@
 		<h1>新規登録</h1>
 
 		<ul th:if="${errorList}" class="error">
-			<li th:each="error:${errorList}" th:text="${error}"></li>
+			<li th:each="error:${errorList}" th:text="${error}" style ="color:red"></li>
 		</ul>
 
 		<form action="/register" method="post">

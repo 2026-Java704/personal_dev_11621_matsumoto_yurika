@@ -5,10 +5,6 @@
 	<meta charset="UTF-8">
 	<title>家計簿</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<script>
-		function goBack() {
-			history.back();}
-	</script>
 
 </head>
 
@@ -19,7 +15,8 @@
 
 		<div class="top-area">
 			<span th:text="${@account.userName}+' の庭'"></span>
-			Top
+			<br>
+			<img th:src="@{/images/harinezumi-star.png}" alt="ハリネズミ" height="100px">
 
 			<form action="/login" method="get">
 				<button>ログアウト</button>
@@ -33,6 +30,11 @@
 			</nav>
 
 			<form action="/items/add" method="post">
+
+				<ul th:if="${errorList}" class="error">
+					<li th:each="error:${errorList}" th:text="${error}" style="color:red"></li>
+				</ul>
+
 				<table border="1">
 					<tr>
 						<th>日付</th>
@@ -67,13 +69,14 @@
 					</tr>
 
 				</table>
+
 				<button>追加</button>
 			</form>
 
-
-
 			<div class="price-area">
-				<button type="button" onclick="goBack()">一覧に戻る</button>
+				<form action="/items" method="get">
+					<button>一覧に戻る</button>
+				</form>
 			</div>
 
 

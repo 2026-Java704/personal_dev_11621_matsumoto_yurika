@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -69,6 +70,9 @@ public class ItemController {
 		model.addAttribute("incomeAndOutcome", incomeAndOutcome);
 		model.addAttribute("income", income);
 		model.addAttribute("outcome", outcome);
+		
+		//画像表示
+		
 
 		return "items";
 	}
@@ -84,11 +88,32 @@ public class ItemController {
 	//項目追加機能
 	@PostMapping("/items/add")
 	public String store(
-			@RequestParam LocalDate addDate,
-			@RequestParam String itemName,
-			@RequestParam Integer genreId,
-			@RequestParam Integer price,
-			@RequestParam String comment) {
+			@RequestParam (defaultValue = "")LocalDate addDate,
+			@RequestParam (defaultValue = "")String itemName,
+			@RequestParam (defaultValue = "")Integer genreId,
+			@RequestParam (defaultValue = "")Integer price,
+			@RequestParam (defaultValue = "")String comment,
+			Model model) {
+		
+		List<String> errorList = new ArrayList<>();
+		if(addDate == null) {
+			errorList.add("日付は必須です");
+		}
+		if(genreId == null) {
+			errorList.add("カテゴリーを選択してください");
+		}
+		if(price == null) {
+			errorList.add("値段は必須です");
+		}
+		
+		
+		if(errorList.size() > 0) {
+			model.addAttribute("errorList", errorList);
+			model.addAttribute("addDate", addDate);
+			model.addAttribute("genreId", genreId);
+			model.addAttribute("price", price);
+			return "addItem";
+		}
 
 		Item item = new Item(
 				userRepository.findById(1).get(),
@@ -114,19 +139,32 @@ public class ItemController {
 	@PostMapping("/items/{id}/edit")
 	public String update(
 			@PathVariable Integer id,
-			@RequestParam LocalDate addDate,
-			@RequestParam String itemName,
-			@RequestParam Integer genreId,
-			@RequestParam Integer price,
-			@RequestParam String comment,
+			@RequestParam (defaultValue = "") LocalDate addDate,
+			@RequestParam (defaultValue = "") String itemName,
+			@RequestParam (defaultValue = "") Integer genreId,
+			@RequestParam (defaultValue = "") Integer price,
+			@RequestParam (defaultValue = "") String comment,
 			Model model) {
-
+		
 		Item item = itemRepository.findById(id).get();
 		item.setAddDate(addDate);
 		item.setItemName(itemName);
 		item.setGenre(genreRepository.findById(genreId).get());
 		item.setPrice(price);
 		item.setComment(comment);
+		
+		List<String> errorList = new ArrayList<>();
+		if(price == null) {
+			errorList.add("値段は必須です");
+		}
+		
+		if(errorList.size() > 0) {
+			model.addAttribute("errorList", errorList);
+			model.addAttribute("item", item);
+			model.addAttribute("genreList", genreRepository.findAll());
+			model.addAttribute("price", price);
+			return "editItem";
+		}
 
 		itemRepository.save(item);
 		return "redirect:/items";

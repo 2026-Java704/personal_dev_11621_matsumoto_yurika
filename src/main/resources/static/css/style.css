@@ -31,6 +31,7 @@ body {
 	grid-row: 1;
 	grid-column: 2;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 /* ヘッダー、フッターの設定 */
@@ -111,7 +112,9 @@ nav button {
 	border: none;
 	width: 80px;
 	cursor: pointer;
-	
+}
+nav button:hover {
+	background-color: rgb(219,252,46);
 }
 
 .price-area{
@@ -160,6 +163,20 @@ table button:hover {
 	background-color: rgb(219,252,46);
 }
 
+footer button {
+	margin-left: 2px;
+	padding: 5px 20px;
+	background-color: rgb(251,249,206);
+	color: rgb(73,97,28);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	border: none;
+	width: 120px;
+	cursor: pointer;	
+}
+
+footer button:hover {
+	background-color: rgb(219,252,46);
+}
 
 
 
