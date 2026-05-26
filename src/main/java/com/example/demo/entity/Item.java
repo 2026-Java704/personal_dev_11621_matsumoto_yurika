@@ -33,6 +33,7 @@ public class Item {
 	private LocalDate addDate;
 	private String comment;
 
+	
 	//コンストラクタ
 	public Item() {
 	}
@@ -47,7 +48,11 @@ public class Item {
 		this.comment = comment;
 	}
 
-	//ゲッターｔセッター
+
+//	public Item(Integer targetPrice) {
+//	}
+
+	//ゲッターセッター
 	public String getItemName() {
 		return itemName;
 	}

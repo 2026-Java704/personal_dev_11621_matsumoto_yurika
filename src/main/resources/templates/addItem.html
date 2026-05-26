@@ -17,7 +17,7 @@
 			<span th:text="${@account.userName}+' の庭'"></span>
 			<br>
 
-			<img th:src="@{/images/udekumi-harinezumi.png}" alt="ハリネズミ（考える）" height="100px">
+			<img th:src="@{/images/udekumi-harinezumi.png}" alt="ハリネズミ（考える）" height="300px">
 		</div>
 
 
@@ -36,12 +36,12 @@
 				<table border="1">
 					<tr>
 						<th>日付</th>
-						<td><input type="date" name="addDate"></td>
+						<td><input type="date" name="addDate" th:value="${addDate}"></td>
 					</tr>
 
 					<tr>
 						<th>名前</th>
-						<td><input type="text" name="itemName"></td>
+						<td><input type="text" name="itemName" th:value="${itemName}"></td>
 					</tr>
 
 					<tr>
@@ -58,12 +58,12 @@
 
 					<tr>
 						<th>金額</th>
-						<td><input type="text" name="price"></td>
+						<td><input type="text" name="price" th:value="${price}"></td>
 					</tr>
 
 					<tr>
 						<th>コメント</th>
-						<td><input type="text" name="comment"></td>
+						<td><input type="text" name="comment"  th:value="${comment}"></td>
 					</tr>
 
 				</table>

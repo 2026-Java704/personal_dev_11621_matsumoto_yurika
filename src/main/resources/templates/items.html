@@ -13,18 +13,28 @@
 	<div class="grid-area">
 
 		<div class="top-area">
-			<span th:text="${@account.userName}+' の庭'"></span>
+			
+			<div class="box">
+				<span th:text="${@account.userName}+' の庭'"></span>
+				<br>
+				目標金額：[[${targetPrice}]]
+
+				<form action="/items" method="get">
+					<input type="int" name="targetPrice" placeholder="目標金額を入力">
+					<button>決定</button>
+				</form>
+			</div>
 
 			<br>
 
 			<img th:if="${incomeAndOutcome &lt; 0}" th:src="@{/images/harinezumi-gyafn.png}" alt="ハリネズミ（赤字）"
-				height="100px">
+				height="300px">
 
-			<img th:if="${incomeAndOutcome &gt;= 0 and incomeAndOutcome &lt; 10000}"
-				th:src="@{/images/harinezumi-ouen.png}" alt="ハリネズミ（通常）" height="100px">
+			<img th:if="${incomeAndOutcome &gt;= 0 and incomeAndOutcome &lt; targetPrice}"
+				th:src="@{/images/harinezumi-ouen.png}" alt="ハリネズミ（通常）" height="300px">
 
-			<img th:if="${incomeAndOutcome &gt;= 10000}" th:src="@{/images/harinezumi-star.png}" alt="ハリネズミ（目標達成）"
-				height="100px">
+			<img th:if="${incomeAndOutcome &gt;= targetPrice}" th:src="@{/images/harinezumi-star.png}" alt="ハリネズミ（目標達成）"
+				height="300x">
 
 		</div>
 

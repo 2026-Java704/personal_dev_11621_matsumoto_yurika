@@ -39,7 +39,9 @@ public class ItemController {
 	@GetMapping("/items")
 	public String index(
 			@RequestParam(defaultValue = "") Integer genreId,
+			@RequestParam(defaultValue = "") Integer targetPrice,
 			Model model) {
+		
 		List<Genre> genreList = genreRepository.findAll();
 		model.addAttribute("genres", genreList);
 
@@ -70,6 +72,11 @@ public class ItemController {
 		model.addAttribute("incomeAndOutcome", incomeAndOutcome);
 		model.addAttribute("income", income);
 		model.addAttribute("outcome", outcome);
+		
+		model.addAttribute("targetPrice", targetPrice);
+		
+//		Item targetPrices = new Item(targetPrice);
+//		itemRepository.save(targetPrices);
 		
 		return "items";
 	}
@@ -106,10 +113,16 @@ public class ItemController {
 		
 		
 		if(errorList.size() > 0) {
+			List<Genre> genreList = genreRepository.findAll();
+			model.addAttribute("genreList", genreList);
 			model.addAttribute("errorList", errorList);
+			
 			model.addAttribute("addDate", addDate);
+			model.addAttribute("itemName", itemName);  
 			model.addAttribute("genreId", genreId);
 			model.addAttribute("price", price);
+			model.addAttribute("comment", comment);
+			
 			return "addItem";
 		}
 
