@@ -21,6 +21,12 @@ public class User {
 	private String email;
 	private String password;
 	
+
+	@Column(name = "target_price")
+	private Integer targetPrice;
+	
+	
+	
 	public User() {
 		
 	}
@@ -40,6 +46,10 @@ public class User {
 		this.password = password;
 	}
 
+	
+	
+	
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -68,7 +78,13 @@ public class User {
 		return id;
 	}
 
-	
+	public Integer getTargetPrice() {
+		return targetPrice;
+	}
+
+	public void setTargetPrice(Integer targetPrice) {
+		this.targetPrice = targetPrice;
+	}
 	
 	
 

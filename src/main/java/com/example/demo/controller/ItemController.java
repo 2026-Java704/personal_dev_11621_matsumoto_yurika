@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Genre;
 import com.example.demo.entity.Item;
+import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.GenreRepository;
 import com.example.demo.repository.ItemRepository;
@@ -41,6 +42,7 @@ public class ItemController {
 			@RequestParam(defaultValue = "") Integer genreId,
 			@RequestParam(defaultValue = "") Integer targetPrice,
 			Model model) {
+		
 		
 		List<Genre> genreList = genreRepository.findAll();
 		model.addAttribute("genres", genreList);
@@ -73,10 +75,16 @@ public class ItemController {
 		model.addAttribute("income", income);
 		model.addAttribute("outcome", outcome);
 		
-		model.addAttribute("targetPrice", targetPrice);
 		
-//		Item targetPrices = new Item(targetPrice);
-//		itemRepository.save(targetPrices);
+		//目標金額設定
+		User user = userRepository.findById(account.getId()).get();
+		
+		if(targetPrice != null) {
+		user.setTargetPrice(targetPrice);
+		userRepository.save(user);
+		}
+		
+		model.addAttribute("targetPrice", user.getTargetPrice());
 		
 		return "items";
 	}

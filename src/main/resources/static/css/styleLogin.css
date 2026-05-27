@@ -2,10 +2,11 @@
 
 /* 全体 */
 body {
+	margin: 0;          /* ★追加：ブラウザが最初から持っている外側の余白をゼロにする */
+	padding: 0;         /* ★追加：内側の余白もゼロにして完全に画面端へ密着させる */
 	background-color: rgb(240,252,169); /* 背景色  */
 	text-align: center; /* 中央寄せ */
-    min-width: 900px; /* 最小幅 */
-}
+	min-width: 900px; /* 最小幅 */
 
 /* ヘッダー、ナビゲーションメニュー、フッター */
 header, nav, footer {
@@ -58,7 +59,11 @@ button:hover {
 footer {
   position: fixed;
   bottom: 0;
+  left: 0;              /* ★追加：画面の左端（0の位置）を基準にして固定する */
   width: 100%;
+  padding-top: 5px; /* 内側余白(上) */
+  padding-bottom: 5px; /* 内側余白(下) */
+  box-sizing: border-box; /* ★追加：パディングが横幅(100%)からはみ出して右にズレるのを防ぐ */
 }
 
 .square {
