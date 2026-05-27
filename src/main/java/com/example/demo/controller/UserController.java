@@ -95,7 +95,7 @@ public class UserController {
 			
 			User user = new User(userName, email, password);
 			userRepository.save(user);
-			return "redirect/login";
+			return "redirect:/login";
 		}
 
 }

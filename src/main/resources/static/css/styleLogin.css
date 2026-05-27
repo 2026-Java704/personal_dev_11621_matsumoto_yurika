@@ -7,6 +7,7 @@ body {
 	background-color: rgb(240,252,169); /* 背景色  */
 	text-align: center; /* 中央寄せ */
 	min-width: 900px; /* 最小幅 */
+	}
 
 /* ヘッダー、ナビゲーションメニュー、フッター */
 header, nav, footer {
@@ -73,7 +74,6 @@ footer {
    margin-top: 80px;
    border-radius: 40px 40px 40px 40px;
    border: 3px solid rgb(73,97,28);
-   background: rgb(251,249,206);
-  
-}
+   background: rgb(251,249,206);  
 
+}
