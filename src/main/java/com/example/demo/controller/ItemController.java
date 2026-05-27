@@ -135,10 +135,10 @@ public class ItemController {
 		}
 
 		Item item = new Item(
-				userRepository.findById(1).get(),
+				userRepository.findById(account.getId()).get(),
 				addDate,
 				itemName,
-				genreRepository.findById(genreId).get(),
+				genreRepository.findById(account.getId()).get(),
 				price,
 				comment);
 		itemRepository.save(item);
